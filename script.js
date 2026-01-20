@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Hover States
-    const interactiveElements = document.querySelectorAll('a, .process-col, h1, .manifesto-line');
+    const interactiveElements = document.querySelectorAll('a, .process-col, h1, .manifesto-line, .ticker-char');
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => cursor.classList.add('active'));
         el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
