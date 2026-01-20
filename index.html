@@ -3,220 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="DataWand - Turn paper forms into digital data. Capture handwritten forms with your iPhone, auto-fill web forms instantly using on-device OCR.">
-    <meta name="keywords" content="OCR, form automation, handwriting recognition, iPhone, Apple Vision, data entry">
-    <meta property="og:title" content="DataWand - Turn Paper Forms into Digital Data">
-    <meta property="og:description" content="Capture handwritten forms with your iPhone, auto-fill web forms instantly using on-device OCR.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://data-wand.com">
-    <title>DataWand - Turn Paper Forms into Digital Data</title>
-    <link rel="icon" type="image/png" href="assets/icon-128.png">
+    <title>DataWand — The Transmutation of Paper</title>
+
+    <!-- Typography: Fraunces for the Analog soul, Space Mono for the Digital structure -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,800;1,9..144,300&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="header">
-        <nav class="nav">
-            <div class="logo">
-                <img src="assets/icon-128.png" alt="DataWand Logo" class="logo-icon">
-                <span class="logo-text">DataWand</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#features">Features</a></li>
-            </ul>
-        </nav>
-    </header>
+
+    <!-- The Architectural Frame (Fixed) -->
+    <div class="frame">
+        <div class="frame-header">
+            <span>DataWand ©2026</span>
+            <span>Est. Honolulu, HI</span>
+        </div>
+        <div class="frame-footer">
+            <span>Status: Operational</span>
+            <span id="coordinates">00.00°N, 00.00°W</span>
+        </div>
+    </div>
+
+    <!-- The Custom Cursor -->
+    <div id="cursor"></div>
+
+    <!-- The Digital Dust Layer (Canvas) -->
+    <canvas id="dust-canvas"></canvas>
 
     <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">Turn Paper Forms into Digital Data</h1>
-                <p class="hero-subtitle">Capture handwritten forms with your iPhone, auto-fill web forms instantly. No cloud required - all processing happens on your devices.</p>
-                <div class="hero-badges">
-                    <span class="badge">
-                        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                        </svg>
-                        Privacy First
-                    </span>
-                    <span class="badge">
-                        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
-                            <line x1="12" y1="18" x2="12.01" y2="18"/>
-                        </svg>
-                        iPhone + Chrome
-                    </span>
-                    <span class="badge">
-                        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
-                            <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
-                            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
-                            <circle cx="12" cy="20" r="1"/>
-                        </svg>
-                        No Server Needed
-                    </span>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="hero-graphic">
-                    <div class="phone-mockup">
-                        <div class="phone-screen">
-                            <div class="scan-animation">
-                                <svg viewBox="0 0 100 100" class="scan-icon">
-                                    <rect x="10" y="10" width="80" height="80" rx="5" fill="none" stroke="currentColor" stroke-width="2"/>
-                                    <line x1="10" y1="50" x2="90" y2="50" stroke="currentColor" stroke-width="2" class="scan-line"/>
-                                    <text x="50" y="35" text-anchor="middle" font-size="8" fill="currentColor">Name: John</text>
-                                    <text x="50" y="50" text-anchor="middle" font-size="8" fill="currentColor">Date: 01/19</text>
-                                    <text x="50" y="65" text-anchor="middle" font-size="8" fill="currentColor">Phone: 555-0123</text>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- HERO: The Analog Artifact -->
+        <section class="hero" data-theme="light">
+            <h1 class="hero-title">
+                <span class="word-1">PAPER</span>
+                <span class="word-2">DISSOLVES</span>
+                <span class="word-3">INTO DATA</span>
+            </h1>
+            <div class="hero-subtitle fade-up">
+                <strong>[ Figure 1.0 ]</strong>
+                <p>The physical world is heavy. We extract the signal from the noise. No servers. No cloud. Just alchemy.</p>
             </div>
         </section>
 
-        <section id="how-it-works" class="how-it-works">
-            <h2 class="section-title">How It Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                            <circle cx="12" cy="13" r="4"/>
-                        </svg>
-                    </div>
-                    <h3 class="step-title">Capture</h3>
-                    <p class="step-description">Point your iPhone at any paper form. The camera captures high-quality images ready for OCR processing.</p>
-                </div>
-                <div class="step-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <path d="M14 2v6h6"/>
-                            <path d="M16 13H8"/>
-                            <path d="M16 17H8"/>
-                            <path d="M10 9H8"/>
-                        </svg>
-                    </div>
-                    <h3 class="step-title">Extract</h3>
-                    <p class="step-description">Apple Vision OCR reads handwriting directly on your iPhone. No cloud uploads - your data stays private.</p>
-                </div>
-                <div class="step-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                            <path d="M22 4L12 14.01l-3-3"/>
-                        </svg>
-                    </div>
-                    <h3 class="step-title">Fill</h3>
-                    <p class="step-description">Auto-populate web forms with extracted data or export to Google Sheets. Save hours of manual data entry.</p>
-                </div>
+        <!-- THE TRANSITION: The Process -->
+        <section class="process" id="process" data-theme="light">
+            <div class="process-col reveal-text">
+                <div class="step-number">01</div>
+                <h3 class="step-title">Capture<br>Artifact</h3>
+                <p class="step-desc">Point the wand. The Vision Engine isolates ink from fiber. Chaos becomes structure in exactly 16ms.</p>
+            </div>
+            <div class="process-col reveal-text">
+                <div class="step-number">02</div>
+                <h3 class="step-title">Local<br>Synthesis</h3>
+                <p class="step-desc">No data leaves the perimeter. The transmutation happens on-device. Privacy is not a feature; it is physics.</p>
+            </div>
+            <div class="process-col reveal-text">
+                <div class="step-number">03</div>
+                <h3 class="step-title">Digital<br>Resonance</h3>
+                <p class="step-desc">The form fills itself. The paper is discarded. The data remains. Immortal. Searchable. Pure.</p>
             </div>
         </section>
 
-        <section id="features" class="features">
-            <h2 class="section-title">Why DataWand?</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Privacy First</h3>
-                    <p class="feature-description">All OCR processing happens on your iPhone using Apple Vision. No data ever leaves your devices or touches any cloud servers.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
-                            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
-                            <circle cx="12" cy="20" r="1"/>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">No Server Needed</h3>
-                    <p class="feature-description">Your Chrome extension connects directly to your iPhone over WiFi. Peer-to-peer connection means no middleman.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="18" height="18" rx="2"/>
-                            <path d="M3 9h18"/>
-                            <path d="M9 21V9"/>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Smart Detection</h3>
-                    <p class="feature-description">Automatically detects form fields, checkboxes, and tables. Create templates once, reuse for hundreds of forms.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <path d="M14 2v6h6"/>
-                            <path d="M12 18v-6"/>
-                            <path d="M9 15l3 3 3-3"/>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Flexible Export</h3>
-                    <p class="feature-description">Auto-fill any web form or export directly to Google Sheets. Choose the workflow that fits your needs.</p>
-                </div>
-            </div>
-        </section>
+        <!-- THE DATA WORLD: Inversion -->
+        <section class="data-world" data-theme="dark">
+            <div class="data-grid"></div>
 
-        <section class="cta">
-            <div class="cta-content">
-                <h2 class="cta-title">Ready to automate your forms?</h2>
-                <p class="cta-description">DataWand works with Chrome on desktop and any iPhone running iOS 15 or later.</p>
-                <div class="cta-requirements">
-                    <div class="requirement">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 8v4l2 2"/>
-                        </svg>
-                        <span>Chrome 88+</span>
-                    </div>
-                    <div class="requirement">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
-                            <line x1="12" y1="18" x2="12.01" y2="18"/>
-                        </svg>
-                        <span>iOS 15+</span>
-                    </div>
-                    <div class="requirement">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
-                            <circle cx="12" cy="20" r="1"/>
-                        </svg>
-                        <span>Same WiFi</span>
-                    </div>
+            <div class="manifesto">
+                <div class="manifesto-line reveal-text">
+                    <span>ZERO LATENCY</span>
+                    <span>[ 00ms ]</span>
+                </div>
+                <div class="manifesto-line reveal-text">
+                    <span>ZERO SERVERS</span>
+                    <span>[ LOCALHOST ]</span>
+                </div>
+                <div class="manifesto-line reveal-text">
+                    <span>INFINITE MEMORY</span>
+                    <span>[ ∞ ]</span>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img src="assets/icon-128.png" alt="DataWand" class="footer-logo-icon">
-                <span>DataWand</span>
-            </div>
-            <p class="footer-tagline">Built with privacy in mind</p>
-            <p class="footer-copyright">&copy; 2026 DataWand. All rights reserved.</p>
-        </div>
+    <footer>
+        <div class="ticker">DATAWAND SYSTEM DATAWAND SYSTEM</div>
+        <p style="margin-top: 2rem; font-size: 0.75rem; opacity: 0.5;">ARCHITECTED FOR PRIVACY. REUSE TEMPLATES FOREVER.</p>
     </footer>
 
     <script src="script.js"></script>
