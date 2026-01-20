@@ -140,6 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(darkSection);
 
     // --- SCROLL REVEALS ---
+    const revealElements = document.querySelectorAll('.reveal-text, .fade-up');
+
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -148,7 +150,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.reveal-text, .fade-up').forEach(el => revealObserver.observe(el));
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Trigger reveal for elements already in viewport on page load
+    setTimeout(() => {
+        revealElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                el.classList.add('visible');
+            }
+        });
+    }, 100);
 
     // --- KINETIC TYPOGRAPHY (HERO PARALLAX) ---
     const heroTitle = document.querySelector('.hero-title');
