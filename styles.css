@@ -412,33 +412,9 @@ footer {
     }
 }
 
-/* --- JS Utility Classes --- */
-
-/* Default: content is visible (for no-JS or slow load) */
+/* --- JS Utility Classes (disabled - always visible) ---
 .reveal-text,
 .fade-up {
-    /* Will be hidden by JS adding .js-ready to body */
+    Content always visible - no reveal animations
 }
-
-/* When JS is ready, hide elements initially */
-.js-ready .reveal-text {
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    transition: clip-path 1.2s cubic-bezier(0.77, 0, 0.175, 1);
-}
-
-.js-ready .reveal-text.visible,
-.reveal-text.visible {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-}
-
-.js-ready .fade-up {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.js-ready .fade-up.visible,
-.fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+*/
