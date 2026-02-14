@@ -3,95 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataWand — The Transmutation of Paper</title>
-
-    <!-- Typography: Fraunces for the Analog soul, Space Mono for the Digital structure -->
+    <title>DataWand — Stop Typing. Start Snapping.</title>
+    <meta name="description" content="Take a photo of any paper form with your iPhone. DataWand reads it and fills in your computer automatically. No cloud, no servers, no accounts. $5/month.">
+    <link rel="icon" href="assets/icon-128.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,800;1,9..144,300&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="assets/icon-128.png">
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
 
-    <!-- The Architectural Frame (Fixed) -->
-    <div class="frame">
-        <div class="frame-header">
-            <span>DataWand ©2026</span>
-            <span>Est. Honolulu, HI</span>
+    <!-- Navigation -->
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-inner">
+            <a href="/" class="nav-brand" aria-label="DataWand home">
+                <div class="nav-monogram">DW</div>
+                <span class="nav-wordmark">DataWand</span>
+            </a>
+            <div class="nav-links">
+                <a href="/how-it-works" class="nav-link">How It Works</a>
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+                        Use Cases
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="nav-dropdown-menu" role="menu">
+                        <a href="/use-cases/non-profits" class="nav-dropdown-item" role="menuitem">Non-Profits</a>
+                        <a href="/use-cases/healthcare-clinics" class="nav-dropdown-item" role="menuitem">Healthcare Clinics</a>
+                        <a href="/use-cases/property-management" class="nav-dropdown-item" role="menuitem">Property Management</a>
+                        <a href="/use-cases/insurance-agencies" class="nav-dropdown-item" role="menuitem">Insurance Agencies</a>
+                        <a href="/use-cases/field-services" class="nav-dropdown-item" role="menuitem">Field Services</a>
+                        <a href="/use-cases/construction" class="nav-dropdown-item" role="menuitem">Construction</a>
+                        <a href="/use-cases/government" class="nav-dropdown-item" role="menuitem">Government Offices</a>
+                        <a href="/use-cases/religious-organizations" class="nav-dropdown-item" role="menuitem">Religious Organizations</a>
+                    </div>
+                </div>
+                <a href="/pricing" class="nav-link">Pricing</a>
+                <a href="/about" class="nav-link">About</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                <a href="/pricing" class="btn btn-primary btn-sm">Get Started</a>
+                <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
-        <div class="frame-footer">
-            <span>Status: Brewing</span>
-            <span id="coordinates">00.00°N, 00.00°W</span>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" role="dialog" aria-label="Mobile navigation">
+        <div class="mobile-menu-links">
+            <a href="/how-it-works" class="mobile-menu-link">How It Works</a>
+            <a href="/pricing" class="mobile-menu-link">Pricing</a>
+            <a href="/about" class="mobile-menu-link">About</a>
+            <div class="mobile-menu-group-title">Use Cases</div>
+            <a href="/use-cases/non-profits" class="mobile-menu-sublink">Non-Profits</a>
+            <a href="/use-cases/healthcare-clinics" class="mobile-menu-sublink">Healthcare Clinics</a>
+            <a href="/use-cases/property-management" class="mobile-menu-sublink">Property Management</a>
+            <a href="/use-cases/insurance-agencies" class="mobile-menu-sublink">Insurance Agencies</a>
+            <a href="/use-cases/field-services" class="mobile-menu-sublink">Field Services</a>
+            <a href="/use-cases/construction" class="mobile-menu-sublink">Construction</a>
+            <a href="/use-cases/government" class="mobile-menu-sublink">Government Offices</a>
+            <a href="/use-cases/religious-organizations" class="mobile-menu-sublink">Religious Organizations</a>
+            <div class="mobile-menu-cta">
+                <a href="/pricing" class="btn btn-primary btn-lg" style="width:100%;">Get Started</a>
+            </div>
         </div>
     </div>
 
-    <!-- The Custom Cursor -->
-    <div id="cursor"></div>
+    <main id="main">
 
-    <!-- The Digital Dust Layer (Canvas) -->
-    <canvas id="dust-canvas"></canvas>
-
-    <main>
-        <!-- HERO: The Analog Artifact -->
-        <section class="hero" data-theme="light">
-            <h1 class="hero-title">
-                <span class="word-1">PAPER</span>
-                <span class="word-2">DISSOLVES</span>
-                <span class="word-3">INTO DATA</span>
-            </h1>
-            <div class="hero-subtitle fade-up">
-                <strong>[ Figure 1.0 ]</strong>
-                <p>The physical world is heavy. We extract the signal from the noise. No servers. No cloud. Just alchemy.</p>
-            </div>
-        </section>
-
-        <!-- THE TRANSITION: The Process -->
-        <section class="process" id="process" data-theme="light">
-            <div class="process-col reveal-text">
-                <div class="step-number">01</div>
-                <h3 class="step-title">Capture<br>Artifact</h3>
-                <p class="step-desc">Point the wand. The Vision Engine isolates ink from fiber. Chaos becomes structure in exactly 16ms.</p>
-            </div>
-            <div class="process-col reveal-text">
-                <div class="step-number">02</div>
-                <h3 class="step-title">Local<br>Synthesis</h3>
-                <p class="step-desc">No data leaves the perimeter. The transmutation happens on-device. Privacy is not a feature; it is physics.</p>
-            </div>
-            <div class="process-col reveal-text">
-                <div class="step-number">03</div>
-                <h3 class="step-title">Digital<br>Resonance</h3>
-                <p class="step-desc">The form fills itself. The paper is discarded. The data remains. Immortal. Searchable. Pure.</p>
-            </div>
-        </section>
-
-        <!-- THE DATA WORLD: Inversion -->
-        <section class="data-world" data-theme="dark">
-            <div class="data-grid"></div>
-
-            <div class="manifesto">
-                <div class="manifesto-line reveal-text">
-                    <span>ZERO LATENCY</span>
-                    <span>[ 00ms ]</span>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-bg" aria-hidden="true"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Stop Typing. Start Snapping.</h1>
+                    <p class="hero-subtitle">Take a photo of any paper form with your iPhone. DataWand reads it and fills in your computer automatically.</p>
+                    <div class="hero-ctas">
+                        <a href="/pricing" class="btn btn-primary btn-lg">Get Started — It's $5/month</a>
+                        <a href="/how-it-works" class="btn btn-secondary btn-lg">See How It Works</a>
+                    </div>
                 </div>
-                <div class="manifesto-line reveal-text">
-                    <span>ZERO SERVERS</span>
-                    <span>[ LOCALHOST ]</span>
-                </div>
-                <div class="manifesto-line reveal-text">
-                    <span>INFINITE UPLOADS</span>
-                    <span>[ ∞ ]</span>
+                <div class="hero-visual fade-up" aria-hidden="true">
+                    <div class="hero-mockup">
+                        <div class="hero-phone">
+                            <div class="hero-phone-notch"></div>
+                            <svg class="hero-phone-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="40" height="40"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                            <span class="hero-phone-label">Snap a Photo</span>
+                        </div>
+                        <div class="hero-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="32" height="32"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </div>
+                        <div class="hero-browser">
+                            <div class="hero-browser-bar">
+                                <span class="hero-browser-dot"></span>
+                                <span class="hero-browser-dot"></span>
+                                <span class="hero-browser-dot"></span>
+                            </div>
+                            <div class="hero-browser-content">
+                                <div class="hero-form-field"></div>
+                                <div class="hero-form-field"></div>
+                                <div class="hero-form-field"></div>
+                                <div class="hero-form-field"></div>
+                                <div class="hero-checkmark">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                                    Auto-filled!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <!-- How It Works (3 Steps) -->
+        <section class="section section-alt" id="how-it-works-brief">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <h2>How It Works</h2>
+                    <p>Three steps. That's it.</p>
+                </div>
+                <div class="steps">
+                    <div class="step fade-up">
+                        <div class="step-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                        </div>
+                        <h3>Snap a Photo</h3>
+                        <p>Take a picture of the filled-out form with your iPhone.</p>
+                    </div>
+                    <div class="step fade-up">
+                        <div class="step-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8 19 13"/><path d="M15 9h0"/><path d="M17.8 6.2 19 5"/><path d="m3 21 9-9"/><path d="M12.2 6.2 11 5"/></svg>
+                        </div>
+                        <h3>We Read It</h3>
+                        <p>DataWand reads the handwriting right on your phone. Nothing leaves your device.</p>
+                    </div>
+                    <div class="step fade-up">
+                        <div class="step-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><polyline points="7 10 10 13 17 7"/></svg>
+                        </div>
+                        <h3>Auto-Fill</h3>
+                        <p>Your web form or Google Sheet fills itself in. Done.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Value Proposition -->
+        <section class="section">
+            <div class="container">
+                <div class="value-grid fade-up">
+                    <div class="value-content">
+                        <h2>Data Entry Is Costing You a Fortune</h2>
+                        <p>If your team re-enters 20+ forms a day, you're burning 2 hours every day on data entry.</p>
+                        <p>That's over <strong class="value-highlight">$15,000 a year</strong> in labor — for a single person.</p>
+                        <p>DataWand pays for itself on Day 1.</p>
+                    </div>
+                    <div class="value-stat">
+                        <div class="value-stat-number">$15,000+</div>
+                        <div class="value-stat-label">wasted per year on data entry</div>
+                        <div class="value-stat-sub">per employee, based on 20 forms/day</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust & Privacy -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="trust-headline fade-up">Your data never leaves your devices.</h2>
+                <div class="trust-grid fade-up">
+                    <div class="trust-item">
+                        <div class="trust-icon" aria-hidden="true">&#128274;</div>
+                        <div class="trust-label">No Cloud</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon" aria-hidden="true">&#128246;</div>
+                        <div class="trust-label">Direct WiFi</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon" aria-hidden="true">&#128241;</div>
+                        <div class="trust-label">On-Device OCR</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon" aria-hidden="true">&#128737;</div>
+                        <div class="trust-label">No Accounts Needed</div>
+                    </div>
+                </div>
+                <p class="trust-note fade-up">All handwriting recognition happens on your iPhone — powered by Apple Vision.</p>
+            </div>
+        </section>
+
+        <!-- Use Cases Grid -->
+        <section class="section" id="use-cases">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <h2>Built for Every Office</h2>
+                    <p>No matter your industry, if you're typing paper forms into a computer, DataWand can help.</p>
+                </div>
+                <div class="use-cases-grid">
+                    <a href="/use-cases/non-profits" class="use-case-card fade-up">
+                        <div class="use-case-icon" aria-hidden="true">&#10084;&#65039;</div>
+                        <h3>Non-Profits</h3>
+                        <p>Spend time on your mission, not paperwork.</p>
+                    </a>
+                    <a href="/use-cases/healthcare-clinics" class="use-case-card fade-up">
+                        <div class="use-case-icon" aria-hidden="true">&#9877;&#65039;</div>
+                        <h3>Healthcare Clinics</h3>
+                        <p>Patient intake without the data entry headache.</p>
+                    </a>
+                    <a href="/use-cases/property-management" class="use-case-card fade-up">
+                        <div class="use-case-icon" aria-hidden="true">&#127968;</div>
+                        <h3>Property Management</h3>
+                        <p>Lease applications processed in seconds.</p>
+                    </a>
+                    <a href="/use-cases/insurance-agencies" class="use-case-card fade-up">
+                        <div class="use-case-icon" aria-hidden="true">&#128196;</div>
+                        <h3>Insurance Agencies</h3>
+                        <p>Quote faster, bind faster, grow faster.</p>
+                    </a>
+                    <a href="/use-cases/field-services" class="use-case-card fade-up">
+                        <div class="use-case-icon" aria-hidden="true">&#128295;</div>
+                        <h3>Field Services</h3>
+                        <p>From clipboard to computer, automatically.</p>
+                    </a>
+                    <a href="/use-cases/construction" class="use-case-card fade-up">
+                        <div class="use-case-icon" aria-hidden="true">&#127959;</div>
+                        <h3>Construction</h3>
+                        <p>Jobsite paperwork, handled.</p>
+                    </a>
+                    <a href="/use-cases/government" class="use-case-card fade-up">
+                        <div class="use-case-icon" aria-hidden="true">&#127963;</div>
+                        <h3>Government Offices</h3>
+                        <p>Serve your community, not your filing cabinet.</p>
+                    </a>
+                    <a href="/use-cases/religious-organizations" class="use-case-card fade-up">
+                        <div class="use-case-icon" aria-hidden="true">&#9962;</div>
+                        <h3>Religious Organizations</h3>
+                        <p>Focus on ministry, not data entry.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Proof / Testimonials -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <h2>What People Are Saying</h2>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card fade-up">
+                        <p class="testimonial-quote">"We used to spend 3 hours every morning typing in patient forms. Now it takes 15 minutes. I wish we had this years ago."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">MR</div>
+                            <div>
+                                <div class="testimonial-name">Maria R.</div>
+                                <div class="testimonial-role">Front Desk Manager, Family Clinic</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card fade-up">
+                        <p class="testimonial-quote">"Our volunteers used to dread data entry Sundays. DataWand turned a 4-hour chore into a 20-minute task."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">JT</div>
+                            <div>
+                                <div class="testimonial-name">James T.</div>
+                                <div class="testimonial-role">Church Administrator</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card fade-up">
+                        <p class="testimonial-quote">"During leasing season we process 50+ applications a day. DataWand saved us from hiring another person just for data entry."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">SK</div>
+                            <div>
+                                <div class="testimonial-name">Sarah K.</div>
+                                <div class="testimonial-role">Property Manager</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="social-proof-line fade-up">Join hundreds of organizations saving hours every day.</p>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-section fade-up">
+                    <h2>Ready to stop typing?</h2>
+                    <a href="/pricing" class="btn btn-primary btn-lg">Get Started for $5/month</a>
+                    <div class="cta-links">
+                        <a href="/about#contact" class="cta-link">Questions? Talk to us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <footer>
-        <div class="ticker">
-            <span class="ticker-char">D</span><span class="ticker-char">W</span><span class="ticker-char">S</span><span class="ticker-char">Y</span><span class="ticker-char">S</span><span class="ticker-char">T</span><span class="ticker-char">E</span><span class="ticker-char">M</span><span class="ticker-char">S</span>
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="nav-brand">
+                        <div class="nav-monogram">DW</div>
+                        <span class="nav-wordmark">DataWand</span>
+                    </a>
+                    <p class="footer-tagline">Form Automation Assistant</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="/how-it-works">How It Works</a></li>
+                        <li><a href="/pricing">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Industries</h4>
+                    <ul>
+                        <li><a href="/use-cases/non-profits">Non-Profits</a></li>
+                        <li><a href="/use-cases/healthcare-clinics">Healthcare Clinics</a></li>
+                        <li><a href="/use-cases/property-management">Property Management</a></li>
+                        <li><a href="/use-cases/insurance-agencies">Insurance Agencies</a></li>
+                        <li><a href="/use-cases/field-services">Field Services</a></li>
+                        <li><a href="/use-cases/construction">Construction</a></li>
+                        <li><a href="/use-cases/government">Government Offices</a></li>
+                        <li><a href="/use-cases/religious-organizations">Religious Organizations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/about#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>Made with care for people who are tired of typing.</span>
+                <span>&copy; 2025 DataWand</span>
+            </div>
         </div>
-        <p style="margin-top: 2rem; font-size: 0.75rem; opacity: 0.5;">ARCHITECTED FOR PRIVACY. REUSE TEMPLATES FOREVER.</p>
     </footer>
 
     <script src="script.js"></script>

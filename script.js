@@ -1,160 +1,138 @@
+/* ============================================
+   DataWand — Global JavaScript
+   ============================================ */
+
 document.addEventListener('DOMContentLoaded', () => {
-    const cursor = document.getElementById('cursor');
-    const coordinates = document.getElementById('coordinates');
-    const canvas = document.getElementById('dust-canvas');
-    const ctx = canvas.getContext('2d');
-    const body = document.body;
-    const frame = document.querySelector('.frame');
 
+  // --- Mobile Menu ---
+  const hamburger = document.querySelector('.nav-hamburger');
+  const mobileMenu = document.querySelector('.mobile-menu');
 
-    // --- CURSOR PHYSICS & INTERACTION ---
-    let mouseX = 0;
-    let mouseY = 0;
-    let cursorX = 0;
-    let cursorY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-
-        // Update Coordinates in Frame UI
-        const xPct = Math.round((e.clientX / window.innerWidth) * 100);
-        const yPct = Math.round((e.clientY / window.innerHeight) * 100);
-        coordinates.innerText = `X:${xPct} Y:${yPct} // SYSTEM.ACTIVE`;
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
     });
 
-    // Hover States
-    const interactiveElements = document.querySelectorAll('a, .process-col, h1, .manifesto-line, .ticker-char');
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('active'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
     });
+  }
 
-    // Smooth Cursor Follow
-    function animateCursor() {
-        const smoothFactor = 0.15;
-        cursorX += (mouseX - cursorX) * smoothFactor;
-        cursorY += (mouseY - cursorY) * smoothFactor;
+  // --- Dark Mode Toggle ---
+  const themeToggle = document.querySelector('.theme-toggle');
+  const html = document.documentElement;
 
-        cursor.style.left = `${cursorX}px`;
-        cursor.style.top = `${cursorY}px`;
+  // Check saved preference or system preference
+  const savedTheme = localStorage.getItem('dw-theme');
+  if (savedTheme) {
+    html.setAttribute('data-theme', savedTheme);
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    html.setAttribute('data-theme', 'dark');
+  }
 
-        requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    // --- CANVAS "DIGITAL DUST" SYSTEM ---
-    let width, height;
-    let particles = [];
-
-    function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    class Particle {
-        constructor(x, y) {
-            this.x = x;
-            this.y = y;
-            // Random velocity
-            this.vx = (Math.random() - 0.5) * 1.5;
-            this.vy = (Math.random() - 0.5) * 1.5;
-            this.life = 1.0;
-            this.size = Math.random() * 2 + 1;
-        }
-
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-            this.life -= 0.015; // Fade out speed
-        }
-
-        draw() {
-            // Check current theme to decide particle color
-            const isDarkMode = body.style.backgroundColor === 'var(--data-bg)' ||
-                             getComputedStyle(body).backgroundColor === 'rgb(5, 5, 5)';
-
-            if (isDarkMode) {
-                 ctx.fillStyle = `rgba(99, 102, 241, ${this.life})`; // Neon Blue
-            } else {
-                 ctx.fillStyle = `rgba(26, 26, 26, ${this.life})`; // Ink Black
-            }
-
-            ctx.beginPath();
-            ctx.rect(this.x, this.y, this.size, this.size); // Square particles = digital
-            ctx.fill();
-        }
-    }
-
-    // Emit particles on mouse move
-    let lastX = 0;
-    let lastY = 0;
-    document.addEventListener('mousemove', (e) => {
-        const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
-        // Only emit if moved enough
-        if (dist > 3) {
-            for(let i=0; i<1; i++) {
-                particles.push(new Particle(e.clientX, e.clientY));
-            }
-            lastX = e.clientX;
-            lastY = e.clientY;
-        }
+  if (themeToggle) {
+    updateThemeIcon();
+    themeToggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('dw-theme', next);
+      updateThemeIcon();
     });
+  }
 
-    function animateParticles() {
-        ctx.clearRect(0, 0, width, height);
+  function updateThemeIcon() {
+    if (!themeToggle) return;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    themeToggle.innerHTML = isDark
+      ? '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
+      : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+    themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  }
 
-        for (let i = particles.length - 1; i >= 0; i--) {
-            particles[i].update();
-            particles[i].draw();
-            if (particles[i].life <= 0) {
-                particles.splice(i, 1);
-            }
-        }
-        requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-
-    // --- THEME SWITCHING (THE TRANSMUTATION) ---
-    const darkSection = document.querySelector('.data-world');
-
+  // --- Scroll Animations (fade-up) ---
+  const fadeElements = document.querySelectorAll('.fade-up');
+  if (fadeElements.length > 0) {
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Enter Data Mode
-                body.style.backgroundColor = 'var(--data-bg)';
-                body.style.color = 'var(--data-light)';
-                frame.style.borderColor = 'var(--data-light)';
-                canvas.style.mixBlendMode = 'screen'; // Light particles on dark
-            } else {
-                // Exit Data Mode (Return to Paper)
-                body.style.backgroundColor = 'var(--paper-bg)';
-                body.style.color = 'var(--paper-ink)';
-                frame.style.borderColor = 'var(--paper-ink)';
-                canvas.style.mixBlendMode = 'multiply'; // Dark particles on light
-            }
-        });
-    }, { threshold: 0.15 });
-
-    observer.observe(darkSection);
-
-
-    // --- KINETIC TYPOGRAPHY (HERO PARALLAX) ---
-    const heroTitle = document.querySelector('.hero-title');
-    document.addEventListener('mousemove', (e) => {
-        // Calculate position relative to center
-        const x = (e.clientX / window.innerWidth - 0.5) * 2;
-        const y = (e.clientY / window.innerHeight - 0.5) * 2;
-
-        // Skew title slightly
-        if(heroTitle) {
-            heroTitle.style.transform = `
-                perspective(1000px)
-                rotateX(${y * -2}deg)
-                rotateY(${x * 2}deg)
-            `;
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
     });
+
+    fadeElements.forEach(el => observer.observe(el));
+  }
+
+  // --- FAQ Accordion ---
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+
+    if (question && answer) {
+      question.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+
+        // Close all others
+        faqItems.forEach(other => {
+          if (other !== item) {
+            other.classList.remove('open');
+            const otherAnswer = other.querySelector('.faq-answer');
+            if (otherAnswer) otherAnswer.style.maxHeight = '0';
+          }
+        });
+
+        // Toggle current
+        item.classList.toggle('open');
+        if (!isOpen) {
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        } else {
+          answer.style.maxHeight = '0';
+        }
+      });
+    }
+  });
+
+  // --- Smooth Scroll for Hash Links ---
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 72;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // --- Contact Form (basic) ---
+  const contactForm = document.querySelector('.contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = contactForm.querySelector('.btn');
+      const originalText = btn.textContent;
+      btn.textContent = 'Message Sent!';
+      btn.style.backgroundColor = '#22c55e';
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.backgroundColor = '';
+        contactForm.reset();
+      }, 2500);
+    });
+  }
+
 });
